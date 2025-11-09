@@ -1,0 +1,16 @@
+node_modules
+dist
+.env
+.DS_Store
+.vscode
+.git
+.gitignore
+npm-debug.log
+coverage
+.env.local
+.prisma
+.prisma
+generated
+node_modules
+**/node_modules
+.idea
