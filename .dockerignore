@@ -10,7 +10,6 @@ coverage
 .env.local
 .prisma
 .prisma
-generated
 node_modules
 **/node_modules
 .idea
