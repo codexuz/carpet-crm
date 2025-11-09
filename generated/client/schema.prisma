@@ -113,15 +113,17 @@ model Customer {
 }
 
 model CustomerDebt {
-  id         String   @id @default(cuid())
-  customerId String
-  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  amount     Int // + qarz, - to'lov
-  note       String?
-  createdAt  DateTime @default(now())
+  id          String    @id @default(cuid())
+  customerId  String
+  customer    Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  amount      Int // + qarz, - to'lov
+  note        String?
+  paymentDate DateTime? // to'lov sanasi yoki to'lov muddati
+  createdAt   DateTime  @default(now())
 
   @@index([customerId])
   @@index([createdAt])
+  @@index([paymentDate])
 }
 
 model SellerProfit {

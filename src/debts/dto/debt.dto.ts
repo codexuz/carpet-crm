@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsInt, IsString, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsInt, IsString, IsOptional, IsDateString } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateDebtDto {
@@ -26,4 +26,14 @@ export class CreateDebtDto {
   @IsOptional()
   @IsString()
   note?: string;
+
+  @ApiPropertyOptional({ 
+    example: '2025-12-31T00:00:00.000Z', 
+    description: 'Payment due date or actual payment date',
+    type: 'string',
+    format: 'date-time'
+  })
+  @IsOptional()
+  @IsDateString()
+  paymentDate?: string;
 }

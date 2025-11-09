@@ -186,6 +186,7 @@ exports.Prisma.CustomerDebtScalarFieldEnum = {
   customerId: 'customerId',
   amount: 'amount',
   note: 'note',
+  paymentDate: 'paymentDate',
   createdAt: 'createdAt'
 };
 

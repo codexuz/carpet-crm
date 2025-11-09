@@ -118,10 +118,12 @@ model CustomerDebt {
   customer    Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   amount      Int      // + qarz, - to'lov
   note        String?
+  paymentDate DateTime? // to'lov sanasi yoki to'lov muddati
   createdAt   DateTime @default(now())
 
   @@index([customerId])
   @@index([createdAt])
+  @@index([paymentDate])
 }
 
 model SellerProfit {

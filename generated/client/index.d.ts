@@ -8553,6 +8553,7 @@ export namespace Prisma {
     customerId: string | null
     amount: number | null
     note: string | null
+    paymentDate: Date | null
     createdAt: Date | null
   }
 
@@ -8561,6 +8562,7 @@ export namespace Prisma {
     customerId: string | null
     amount: number | null
     note: string | null
+    paymentDate: Date | null
     createdAt: Date | null
   }
 
@@ -8569,6 +8571,7 @@ export namespace Prisma {
     customerId: number
     amount: number
     note: number
+    paymentDate: number
     createdAt: number
     _all: number
   }
@@ -8587,6 +8590,7 @@ export namespace Prisma {
     customerId?: true
     amount?: true
     note?: true
+    paymentDate?: true
     createdAt?: true
   }
 
@@ -8595,6 +8599,7 @@ export namespace Prisma {
     customerId?: true
     amount?: true
     note?: true
+    paymentDate?: true
     createdAt?: true
   }
 
@@ -8603,6 +8608,7 @@ export namespace Prisma {
     customerId?: true
     amount?: true
     note?: true
+    paymentDate?: true
     createdAt?: true
     _all?: true
   }
@@ -8698,6 +8704,7 @@ export namespace Prisma {
     customerId: string
     amount: number
     note: string | null
+    paymentDate: Date | null
     createdAt: Date
     _count: CustomerDebtCountAggregateOutputType | null
     _avg: CustomerDebtAvgAggregateOutputType | null
@@ -8725,6 +8732,7 @@ export namespace Prisma {
     customerId?: boolean
     amount?: boolean
     note?: boolean
+    paymentDate?: boolean
     createdAt?: boolean
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["customerDebt"]>
@@ -8734,6 +8742,7 @@ export namespace Prisma {
     customerId?: boolean
     amount?: boolean
     note?: boolean
+    paymentDate?: boolean
     createdAt?: boolean
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["customerDebt"]>
@@ -8743,6 +8752,7 @@ export namespace Prisma {
     customerId?: boolean
     amount?: boolean
     note?: boolean
+    paymentDate?: boolean
     createdAt?: boolean
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["customerDebt"]>
@@ -8752,10 +8762,11 @@ export namespace Prisma {
     customerId?: boolean
     amount?: boolean
     note?: boolean
+    paymentDate?: boolean
     createdAt?: boolean
   }
 
-  export type CustomerDebtOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerId" | "amount" | "note" | "createdAt", ExtArgs["result"]["customerDebt"]>
+  export type CustomerDebtOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "customerId" | "amount" | "note" | "paymentDate" | "createdAt", ExtArgs["result"]["customerDebt"]>
   export type CustomerDebtInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
   }
@@ -8776,6 +8787,7 @@ export namespace Prisma {
       customerId: string
       amount: number
       note: string | null
+      paymentDate: Date | null
       createdAt: Date
     }, ExtArgs["result"]["customerDebt"]>
     composites: {}
@@ -9205,6 +9217,7 @@ export namespace Prisma {
     readonly customerId: FieldRef<"CustomerDebt", 'String'>
     readonly amount: FieldRef<"CustomerDebt", 'Int'>
     readonly note: FieldRef<"CustomerDebt", 'String'>
+    readonly paymentDate: FieldRef<"CustomerDebt", 'DateTime'>
     readonly createdAt: FieldRef<"CustomerDebt", 'DateTime'>
   }
     
@@ -10834,6 +10847,7 @@ export namespace Prisma {
     customerId: 'customerId',
     amount: 'amount',
     note: 'note',
+    paymentDate: 'paymentDate',
     createdAt: 'createdAt'
   };
 
@@ -11386,6 +11400,7 @@ export namespace Prisma {
     customerId?: StringFilter<"CustomerDebt"> | string
     amount?: IntFilter<"CustomerDebt"> | number
     note?: StringNullableFilter<"CustomerDebt"> | string | null
+    paymentDate?: DateTimeNullableFilter<"CustomerDebt"> | Date | string | null
     createdAt?: DateTimeFilter<"CustomerDebt"> | Date | string
     customer?: XOR<CustomerScalarRelationFilter, CustomerWhereInput>
   }
@@ -11395,6 +11410,7 @@ export namespace Prisma {
     customerId?: SortOrder
     amount?: SortOrder
     note?: SortOrderInput | SortOrder
+    paymentDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     customer?: CustomerOrderByWithRelationInput
   }
@@ -11407,6 +11423,7 @@ export namespace Prisma {
     customerId?: StringFilter<"CustomerDebt"> | string
     amount?: IntFilter<"CustomerDebt"> | number
     note?: StringNullableFilter<"CustomerDebt"> | string | null
+    paymentDate?: DateTimeNullableFilter<"CustomerDebt"> | Date | string | null
     createdAt?: DateTimeFilter<"CustomerDebt"> | Date | string
     customer?: XOR<CustomerScalarRelationFilter, CustomerWhereInput>
   }, "id">
@@ -11416,6 +11433,7 @@ export namespace Prisma {
     customerId?: SortOrder
     amount?: SortOrder
     note?: SortOrderInput | SortOrder
+    paymentDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: CustomerDebtCountOrderByAggregateInput
     _avg?: CustomerDebtAvgOrderByAggregateInput
@@ -11432,6 +11450,7 @@ export namespace Prisma {
     customerId?: StringWithAggregatesFilter<"CustomerDebt"> | string
     amount?: IntWithAggregatesFilter<"CustomerDebt"> | number
     note?: StringNullableWithAggregatesFilter<"CustomerDebt"> | string | null
+    paymentDate?: DateTimeNullableWithAggregatesFilter<"CustomerDebt"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"CustomerDebt"> | Date | string
   }
 
@@ -11951,6 +11970,7 @@ export namespace Prisma {
     id?: string
     amount: number
     note?: string | null
+    paymentDate?: Date | string | null
     createdAt?: Date | string
     customer: CustomerCreateNestedOneWithoutDebtsInput
   }
@@ -11960,6 +11980,7 @@ export namespace Prisma {
     customerId: string
     amount: number
     note?: string | null
+    paymentDate?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -11967,6 +11988,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customer?: CustomerUpdateOneRequiredWithoutDebtsNestedInput
   }
@@ -11976,6 +11998,7 @@ export namespace Prisma {
     customerId?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -11984,6 +12007,7 @@ export namespace Prisma {
     customerId: string
     amount: number
     note?: string | null
+    paymentDate?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -11991,6 +12015,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -11999,6 +12024,7 @@ export namespace Prisma {
     customerId?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12572,6 +12598,7 @@ export namespace Prisma {
     customerId?: SortOrder
     amount?: SortOrder
     note?: SortOrder
+    paymentDate?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -12584,6 +12611,7 @@ export namespace Prisma {
     customerId?: SortOrder
     amount?: SortOrder
     note?: SortOrder
+    paymentDate?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -12592,6 +12620,7 @@ export namespace Prisma {
     customerId?: SortOrder
     amount?: SortOrder
     note?: SortOrder
+    paymentDate?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -13990,6 +14019,7 @@ export namespace Prisma {
     id?: string
     amount: number
     note?: string | null
+    paymentDate?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -13997,6 +14027,7 @@ export namespace Prisma {
     id?: string
     amount: number
     note?: string | null
+    paymentDate?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -14050,6 +14081,7 @@ export namespace Prisma {
     customerId?: StringFilter<"CustomerDebt"> | string
     amount?: IntFilter<"CustomerDebt"> | number
     note?: StringNullableFilter<"CustomerDebt"> | string | null
+    paymentDate?: DateTimeNullableFilter<"CustomerDebt"> | Date | string | null
     createdAt?: DateTimeFilter<"CustomerDebt"> | Date | string
   }
 
@@ -14445,6 +14477,7 @@ export namespace Prisma {
     id?: string
     amount: number
     note?: string | null
+    paymentDate?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -14492,6 +14525,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14499,6 +14533,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14506,6 +14541,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     note?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
