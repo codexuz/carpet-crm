@@ -2,6 +2,18 @@
 
 A complete ERP (Enterprise Resource Planning) system for managing carpet store operations including inventory, sales, customers, and seller commissions.
 
+## 📚 Interactive API Documentation
+
+**Swagger UI is available at: `http://localhost:3000/api`**
+
+The interactive Swagger documentation provides:
+- Complete API reference with examples
+- Try-it-out functionality for all endpoints
+- Request/response schemas
+- Authentication testing
+
+See [SWAGGER_GUIDE.md](SWAGGER_GUIDE.md) for detailed usage instructions.
+
 ## Features
 
 ### 🔐 Authentication & Authorization

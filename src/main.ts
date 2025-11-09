@@ -31,29 +31,14 @@ async function bootstrap() {
     .addTag('customers', 'Customer management')
     .addTag('debts', 'Debt tracking')
     .addTag('seller-profit', 'Seller commission tracking')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        name: 'JWT',
-        description: 'Enter JWT token',
-        in: 'header',
-      },
-      'JWT-auth',
-    )
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document, {
-    customSiteTitle: 'Carpet ERP API Docs',
-    customfavIcon: 'https://nestjs.com/img/logo-small.svg',
-    customCss: '.swagger-ui .topbar { display: none }',
-  });
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, documentFactory);
 
   const port = process.env.PORT ?? 3000;
   await app.listen(port);
   console.log(`Application is running on: http://localhost:${port}`);
-  console.log(`Swagger documentation available at: http://localhost:${port}/api`);
+  console.log(`Swagger documentation available at: http://localhost:${port}/api/docs`);
 }
 bootstrap();
