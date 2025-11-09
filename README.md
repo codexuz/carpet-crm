@@ -75,6 +75,12 @@ npm run start:dev
 
 The API will be available at `http://localhost:3000`
 
+### Swagger API Documentation
+Once the server is running, access the interactive API documentation at:
+```
+http://localhost:3000/api
+```
+
 ### Default Login Credentials (after seeding)
 - **Admin**: Phone: `+998901234567`, Password: `admin123`
 - **Seller**: Phone: `+998901234568`, Password: `seller123`
