@@ -1,53 +1,205 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🧵 Carpet Store ERP System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A comprehensive Enterprise Resource Planning (ERP) system for carpet stores, built with NestJS and Prisma. Manage inventory, sales, customers, and seller commissions efficiently.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## ✨ Features
 
-## Description
+### 🔐 Authentication & Authorization
+- JWT-based authentication
+- Role-based access control (ADMIN, SELLER)
+- Secure password hashing
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### 📦 Inventory Management
+- Complete carpet inventory tracking
+- Specifications: dimensions, pattern, color, material
+- Cost and sell price management
+- Automatic area calculation
+- Advanced search and filtering
+- Real-time availability status
 
-## Project setup
+### 💰 Sales Management
+- Multi-item sales transactions
+- Automatic profit calculation
+- Partial payment support
+- Debt tracking
+- Transaction-safe operations
+- Payment history
 
+### 👥 Customer Management
+- Customer database
+- Purchase history
+- Debt tracking and payment recording
+- Top debtors reports
+
+### 🏪 Sales Points
+- Multiple location management
+- Location-specific statistics
+- Sales tracking per point
+
+### 💵 Seller Commission
+- Automatic commission calculation (10% of profit)
+- Performance tracking
+- Commission tied to payment completion
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js (v18+)
+- PostgreSQL
+- npm or yarn
+
+### Installation
+
+1. **Clone and install dependencies**
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
-
+2. **Setup environment**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+cp .env.example .env
+# Edit .env with your database URL and JWT secret
 ```
 
-## Run tests
+3. **Setup database**
+```bash
+npm run prisma:generate
+npm run prisma:migrate
+npm run prisma:seed  # Optional: adds sample data
+```
+
+4. **Start the server**
+```bash
+npm run start:dev
+```
+
+The API will be available at `http://localhost:3000`
+
+### Default Login Credentials (after seeding)
+- **Admin**: Phone: `+998901234567`, Password: `admin123`
+- **Seller**: Phone: `+998901234568`, Password: `seller123`
+
+## 📚 Documentation
+
+- **[QUICK_START.md](QUICK_START.md)** - Detailed setup guide
+- **[API_DOCUMENTATION.md](API_DOCUMENTATION.md)** - Complete API reference
+- **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)** - Technical overview
+
+## 🛠️ Tech Stack
+
+- **Framework**: NestJS
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **Authentication**: JWT (Passport)
+- **Validation**: class-validator, class-transformer
+- **Security**: bcrypt
+
+## 📋 API Endpoints Overview
+
+### Authentication
+- `POST /auth/register` - Register new user
+- `POST /auth/login` - Login
+
+### Core Resources (Protected)
+- `/users` - User management (ADMIN)
+- `/carpets` - Inventory management
+- `/sale-points` - Sales locations
+- `/sales` - Sales transactions
+- `/customers` - Customer management
+- `/debts` - Debt tracking
+- `/seller-profit` - Commission reports
+
+See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for complete endpoint list.
+
+## 🗄️ Database Schema
+
+- **User** - System users (admins and sellers)
+- **SalePoint** - Physical sales locations
+- **Carpet** - Carpet inventory
+- **Sale** - Sales transactions
+- **SaleItem** - Individual items in a sale
+- **Customer** - Customer information
+- **CustomerDebt** - Debt tracking
+- **SellerProfit** - Commission records
+
+## 📊 Key Business Logic
+
+### Sale Creation
+1. Validates carpet availability
+2. Calculates totals (price, cost, profit)
+3. Marks carpets as sold
+4. Creates debt records
+5. Calculates seller commission
+6. All in a single transaction
+
+### Payment Processing
+1. Updates sale amounts
+2. Records payment in debt history
+3. Updates commission percentages
+4. Transaction-safe
+
+## 🧪 Development
+
+### Available Scripts
 
 ```bash
-# unit tests
+# Development
+npm run start:dev
+
+# Build
+npm run build
+
+# Production
+npm run start:prod
+
+# Database
+npm run prisma:generate    # Generate Prisma client
+npm run prisma:migrate     # Run migrations
+npm run prisma:seed        # Seed database
+npm run prisma:studio      # Open Prisma Studio
+
+# Testing
+npm run test
+npm run test:watch
+npm run test:cov
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── auth/              # Authentication module
+├── users/             # User management
+├── carpets/           # Inventory
+├── sale-points/       # Sales locations
+├── sales/             # Sales transactions
+├── customers/         # Customer management
+├── debts/             # Debt tracking
+├── seller-profit/     # Commission tracking
+├── prisma/            # Prisma service
+└── main.ts            # Entry point
+```
+
+## 🔒 Security Features
+
+- JWT token authentication
+- Role-based route protection
+- Password hashing with bcrypt
+- Request validation
+- CORS enabled
+- Environment variable configuration
+
+## 🤝 Contributing
+
+This is a complete ERP system ready for production use. Feel free to customize for your specific needs.
+
+## 📄 License
+
+MIT
+
+---
+
+Built with ❤️ using NestJS and Prisma
 $ npm run test
 
 # e2e tests

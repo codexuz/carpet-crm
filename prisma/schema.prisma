@@ -1,15 +1,141 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../generated/client"
+}
+
+model User {
+  id          String    @id @default(cuid())
+  name        String
+  phone       String?   @unique
+  role        UserRole  @default(SELLER)
+  password    String
+
+  sales       Sale[]            // qaysi savdoni qaysi sotuvchi qilgan
+  sellerCuts  SellerProfit[]    // sotuvchi oladigan ulush hisoblari
+  createdAt   DateTime @default(now())
+
+  @@index([phone])
+  @@index([role])
+}
+
+enum UserRole {
+  ADMIN
+  SELLER
+}
+
+model SalePoint {
+  id        String   @id @default(cuid())
+  name      String
+  sales     Sale[]
+  createdAt DateTime @default(now())
+}
+
+model Carpet {
+  id             String    @id @default(cuid())
+  code           String    @unique       // gilam raqami (#201)
+  width          Float
+  height         Float
+  area           Float                    // height * width
+  pattern        String                    // naqsh/katalog kodi
+  color          String?
+  material       String?
+
+  costPrice      Int        // kirim narxi (butun gilam bo'yicha)
+  sellPrice      Int        // tavsiya etilgan sotuv narxi (butun gilam bo'yicha)
+
+  isSold         Boolean @default(false)
+  soldAt         DateTime?
+  saleItem       SaleItem?
+  createdAt      DateTime @default(now())
+
+  @@index([code])
+  @@index([isSold])
+  @@index([pattern])
+}
+
+model Sale {
+  id            String        @id @default(cuid())
+  salePointId   String
+  sellerId      String?
+  customerId    String?
+
+  salePoint     SalePoint     @relation(fields: [salePointId], references: [id])
+  seller        User?         @relation(fields: [sellerId], references: [id])
+  customer      Customer?     @relation(fields: [customerId], references: [id])
+
+  items         SaleItem[]    // sotilgan gilam(lar)
+  sellerProfits SellerProfit[]
+
+  totalPrice    Int           // jami sotuv narxi
+  totalCost     Int           // jami kirim narxi
+  profit        Int           // totalPrice - totalCost
+
+  paidAmount    Int @default(0)   // qancha pul to'langan
+  debtAmount    Int @default(0)   // qancha qarz qoldi
+
+  createdAt     DateTime @default(now())
+
+  @@index([salePointId])
+  @@index([sellerId])
+  @@index([customerId])
+  @@index([createdAt])
+}
+
+model SaleItem {
+  id        String  @id @default(cuid())
+  saleId    String
+  carpetId  String  @unique
+
+  sale      Sale     @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  carpet    Carpet   @relation(fields: [carpetId], references: [id])
+
+  price     Int      // sotilgan narx
+  cost      Int      // kirim narxi
+  profit    Int      // profit = price - cost
+
+  @@index([saleId])
+}
+
+model Customer {
+  id          String           @id @default(cuid())
+  name        String
+  phone       String?
+  sales       Sale[]
+  debts       CustomerDebt[]
+  createdAt   DateTime @default(now())
+
+  @@index([phone])
+}
+
+model CustomerDebt {
+  id          String   @id @default(cuid())
+  customerId  String
+  customer    Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  amount      Int      // + qarz, - to'lov
+  note        String?
+  createdAt   DateTime @default(now())
+
+  @@index([customerId])
+  @@index([createdAt])
+}
+
+model SellerProfit {
+  id            String    @id @default(cuid())
+  sellerId      String
+  saleId        String
+  amount        Int       // sotuvchining ulushi (pul)
+  openedPercent Float     // foydaning qaysi qismi to'landi = paid/total
+  createdAt     DateTime @default(now())
+
+  seller        User      @relation(fields: [sellerId], references: [id])
+  sale          Sale      @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([sellerId])
+  @@index([saleId])
+  @@index([createdAt])
 }
