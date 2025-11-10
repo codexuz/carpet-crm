@@ -121,6 +121,27 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.CompanyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  address: 'address',
+  phone: 'phone',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UnitScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  symbol: 'symbol',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -145,6 +166,8 @@ exports.Prisma.CarpetScalarFieldEnum = {
   pattern: 'pattern',
   color: 'color',
   material: 'material',
+  companyId: 'companyId',
+  unitId: 'unitId',
   costPrice: 'costPrice',
   sellPrice: 'sellPrice',
   isSold: 'isSold',
@@ -219,6 +242,8 @@ exports.UserRole = exports.$Enums.UserRole = {
 };
 
 exports.Prisma.ModelName = {
+  Company: 'Company',
+  Unit: 'Unit',
   User: 'User',
   SalePoint: 'SalePoint',
   Carpet: 'Carpet',

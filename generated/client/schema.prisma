@@ -8,6 +8,37 @@ generator client {
   output   = "../generated/client"
 }
 
+model Company {
+  id          String  @id @default(cuid())
+  name        String
+  address     String?
+  phone       String?
+  description String?
+  isActive    Boolean @default(true)
+
+  carpets   Carpet[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+  @@index([isActive])
+}
+
+model Unit {
+  id          String  @id @default(cuid())
+  name        String  @unique // e.g., "m²", "kg", "dona", "metr"
+  symbol      String  @unique // e.g., "m²", "kg", "pcs", "m"
+  description String?
+  isActive    Boolean @default(true)
+
+  carpets   Carpet[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+  @@index([symbol])
+}
+
 model User {
   id       String   @id @default(cuid())
   name     String
@@ -45,6 +76,12 @@ model Carpet {
   color    String?
   material String?
 
+  companyId String?
+  unitId    String?
+
+  company Company? @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  unit    Unit?    @relation(fields: [unitId], references: [id], onDelete: SetNull)
+
   costPrice Int // kirim narxi (butun gilam bo'yicha)
   sellPrice Int // tavsiya etilgan sotuv narxi (butun gilam bo'yicha)
 
@@ -56,6 +93,8 @@ model Carpet {
   @@index([code])
   @@index([isSold])
   @@index([pattern])
+  @@index([companyId])
+  @@index([unitId])
 }
 
 model Sale {

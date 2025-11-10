@@ -10,6 +10,8 @@ import { SalesModule } from './sales/sales.module';
 import { CustomersModule } from './customers/customers.module';
 import { DebtsModule } from './debts/debts.module';
 import { SellerProfitModule } from './seller-profit/seller-profit.module';
+import { CompaniesModule } from './companies/companies.module';
+import { UnitsModule } from './units/units.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { SellerProfitModule } from './seller-profit/seller-profit.module';
     CustomersModule,
     DebtsModule,
     SellerProfitModule,
+    CompaniesModule,
+    UnitsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
